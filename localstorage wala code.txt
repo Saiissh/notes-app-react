@@ -1,3 +1,6 @@
+localstorage wala code
+
+
 import logo from './logo.svg';
 import NoteList from './components/NoteList';
 import './App.css';
@@ -8,27 +11,43 @@ import { nanoid } from 'nanoid'
 
 function App() {
 
-  const[noteData,setnoteData] =useState([]);
+  const[noteData,setnoteData] =useState([{
+    id:nanoid(),
+    text:'first Note',
+    date:'11/02/23'}
+    ,
+      {
+      id:nanoid(),
+      text:'second Note',
+      date:'21/03/23'},
+      {
+        id:nanoid(),
+        text:'third Note',
+        date:'05/07/23'
+      }
+      
+
+  ]);
 
   const [search,setSearch] = useState("");
 
   const [darkMode,setDarkMode] = useState(false);
 
   // add notes to local storage
-  useEffect(()=>{
-
-    localStorage.setItem('react-notes-data', JSON.stringify(noteData));
-
-  },[noteData]);
+  
 
   // retreiving notes from local storage
 
   useEffect(()=>{
-  let data= JSON.parse(localStorage.getItem('react-notes-data'));
+    if(localStorage.getItem('react-notes-data')){
+      let data= JSON.parse(localStorage.getItem('react-notes-data'));
 
-  if(data && data.length>0)
-  setnoteData(data);
-
+      if(data && data.length>0)
+      setnoteData(data);
+    }
+    else{
+      setnoteData([]);
+    }
 
   },[]);
 
@@ -46,6 +65,7 @@ function App() {
    
     setnoteData(newnote);
 
+    localStorage.setItem('react-notes-data', JSON.stringify(newnote));
     console.log(noteData);
   }
   
@@ -88,7 +108,7 @@ function App() {
 
     <div className='toppro' >
       <h1 >Notes</h1>
-      <button className='togglebtn' onClick={chngemode}>Toggle</button>
+      <button onClick={chngemode}>Toggle</button>
     </div>
 
     <div className='searchdiv' >

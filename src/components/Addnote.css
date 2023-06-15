@@ -1,0 +1,26 @@
+.newnote{
+    background: rgb(252, 187, 67);
+    
+}
+
+textarea{
+    border: none;
+    resize: none;
+    background: rgb(252, 187, 67);
+    font-size: large;
+}
+
+textarea:focus{
+    outline: none;
+}
+
+.save{
+    background-color: grey;
+    border: none;
+    border-radius: 10px;
+    padding: 5px 10px ;
+}
+
+.save:hover{
+    cursor: pointer;
+}
